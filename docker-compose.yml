@@ -1,13 +1,27 @@
 version: "3"
 services:
-  client:
-    image: "shallon041/client"
-    mem_limit: 128m
-    hostname: client
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - ./data:/data/db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+
   server:
     image: "shallon041/server"
     mem_limit: 128m
     hostname: api
+    depends_on:
+      - "mongodb"
+  client:
+    image: "shallon041/client"
+    mem_limit: 128m
+    hostname: client
+    depends_on:
+      - "server"
+
   nginx:
     image: "shallon041/nginx"
     mem_limit: 128m
