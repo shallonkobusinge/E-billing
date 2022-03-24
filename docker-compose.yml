@@ -1,29 +1,32 @@
 version: "3"
 services:
-  mongodb:
-    image: mongo
-    container_name: mongodb
-    volumes:
-      - ./data:/data/db
+  mongo:
+    image: shallon041/mongodb:latest
+    build: ./
     ports:
       - 27017:27017
-    restart: unless-stopped
 
   server:
-    image: "shallon041/server"
-    mem_limit: 128m
-    hostname: api
+    image: shallon041/server
+    build: ./server/
+    ports:
+      - "5000:8000"
     depends_on:
-      - "mongodb"
+      - "mongo"
+
   client:
-    image: "shallon041/client"
+    image: shallon041/client
     mem_limit: 128m
-    hostname: client
+    ports:
+      - "3000:3000"
     depends_on:
       - "server"
+    links:
+      - server
 
   nginx:
-    image: "shallon041/nginx"
+    image: shallon041/nginx
+    build: ./nginx/
     mem_limit: 128m
     hostname: nginx
     ports:
