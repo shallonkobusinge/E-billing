@@ -22,7 +22,7 @@
     "mocha": "^2.4.5"
   },
   "scripts": {
-    "start": "SET NODE_ENV=dev && nodemon index.js",
+    "start": " nodemon index.js",
     "test": "mocha --timeout 10000"
   }
 }
