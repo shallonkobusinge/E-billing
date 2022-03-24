@@ -8,19 +8,23 @@ let port = 8080;
 let config = require('config'); //we load the db location from the JSON files
 
 //db connection      
-try {
-    mongoose.connect(config.DBHost, {
-        useFindAndModify: true,
-        useUnifiedTopology: true,
-        useNewUrlParser: true
-    });
-    console.log("Connection to the database is established")
-} catch (e) {
-    console.error(e);
-    process.exit(1);
-}
+// try {
+//     mongoose.connect(config.DBHost, {
+//         useFindAndModify: true,
+//         useUnifiedTopology: true,
+//         useNewUrlParser: true
+//     });
+//     console.log("Connection to the database is established")
+// } catch (e) {
+//     console.log(e);
+// }
 
 
+mongoose.connect('mongodb://127.0.0.1:27017/cat1-testing').then(() => {
+    console.log("Connected to Database");
+}).catch((err) => {
+    console.log("Not Connected to Database ERROR! ", err);
+});
 
 //parse application/json and look for raw text                                        
 app.use(bodyParser.json());

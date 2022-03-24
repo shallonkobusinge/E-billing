@@ -8,8 +8,7 @@ COPY ./package*.json ./
 RUN npm install 
 COPY . .
 
-ENV PORT 8000
-
-EXPOSE 8000
+EXPOSE 5000
+USER node
 
 CMD ["npm", "start"]
