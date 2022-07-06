@@ -3,6 +3,7 @@ let express = require('express');
 let app = express();
 let mongoose = require('mongoose');
 let bodyParser = require('body-parser');
+
 const cors = require("cors");
 let port = 8080;
 let config = require('config'); //we load the db location from the JSON files
